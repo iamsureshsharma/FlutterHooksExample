@@ -1,43 +1,43 @@
 # Overview of Flutter Hooks
 
-Whenever anyone pronounce `Flutter`, widgets starts poping in our mind.
+Whenever anyone pronounces `Flutter`, widgets start popping into our mind.
 
 ## *What are the widgets and types*?
 
-In flutter we've two types of widget
+In flutter, we've two types of widget
  
 1. Stateless Widgets
 2. Stateful Widgets
 
-Widget is basically building block of UI flutter.
+Widget is the building block of UI flutter.
 
 Almost all types of widgets are precooked and ready to use in the framework.
 
-> Thats all, for the introduction part 😄
+> That's all, for the introduction part 😄
 >
 
 # Flutter Hooks
 
-## What is Flutter Hooks and Why we need Hooks?
+## What are Flutter Hooks and Why do we need Hooks?
 
 - Flutter Hooks are majorly inspired by **react** Library
 
--  Hooks are a new kind of *object* that manage the *life-cycle* of a **Widget**. They exist for one reason: increase the *code-sharing* between widgets by removing duplicates.
+-  Hooks are a new kind of *object* that manage the *life-cycle* of a **Widget**. They exist for one reason: to increase the *code-sharing* between widgets by removing duplicates.
 
-> This is self explanatory line written in [flutter_hooks](https://pub.dev/packages/flutter_hooks) package
+> This is a self-explanatory line written in [flutter_hooks](https://pub.dev/packages/flutter_hooks) package
 
 
 
-Let's Understand this with Example 
+Let's Understand this with an Example 
 
 Taking the common example of using the `Animation Controller`
 
 To use the animation controller in UI
-we've to first create the variable and then initialise  `Animation Controller` in
+we've to first create the variable and then initialize `Animation Controller` in
 `initState()`.
 
 
- then listen for update in `didUpdateWidget()`
+ then listen for an update in `didUpdateWidget()`
 
  and then dispose the controller in the dispose in the `dispose()`
 
@@ -65,13 +65,13 @@ we've to first create the variable and then initialise  `Animation Controller` i
   }
 ```
 
-All these line of code is to implment the one animation controller
+All these lines of code are to implement the one animation controller
 
-## What if i have to add two more Animation controller ?
+## What if I have to add two more Animation controllers?
 
-We've to repeat the same code with different name 😢
+We've to repeat the same code with different names 😢
 
-If i replace all these line of code with one line of code 🤩
+If I replace all these lines of code with one line of code 🤩
 
 Yes, this is the beauty of `Flutter Hooks`
 
@@ -79,12 +79,12 @@ Yes, this is the beauty of `Flutter Hooks`
 final controller = useAnimationController(duration: duration)
 ```
 
-Only this line, inside the build() will work same
+Only this line, inside the build() will work the same
 
-In previous code all the **life-cycle** of widget, we've to manage 
+In the previous code all the **life-cycle** of the widget, we've to manage 
 
-In flutter hooks all these implementation logic is managed by flutter hook itself
-So, we can add only single line to add the new ```Animation Controller```
+In flutter hooks, all these implementation logic is managed by flutter hook itself
+So, we can add only a single line to add the new ```Animation Controller```
 
 ```dart
 final controller1 = useAnimationController();
@@ -95,9 +95,9 @@ final controller2 = useAnimationController();
 
 - Hooks are used inside the `build()` method 
 - Hooks are totally independent of each other & independent of widgets
-- Similar to State, Hooks are store in the element of widget 
+- Similar to State, Hooks are stored in the element of the widget 
 - Widget store ```List<Hooks>```, unlike the single state
-- ```Hook.use()``` return the Hooks sequentialy
+- ```Hook.use()``` return the Hooks sequentially
 - We can create our own hook by extending the ```HookWidget``` and add the implementation
 - On creating the new hook, one should use the ```use``` prefix
 - Hooks shouldn't be called inside the conditional statement 
@@ -109,7 +109,7 @@ final controller2 = useAnimationController();
   ```
 
 - In the above hooks if i remove the the ```hook2``` then ```hook3``` state will be disposed
-- Because Hooks are store in the list, becacuse it has to do the reindexing to all the hooks
+- Because Hooks are stored in the list, it has to do the reindexing to all the hooks
 
 
  ### List of PreCooked Hooks 
@@ -127,7 +127,7 @@ final controller2 = useAnimationController();
    ## 1. useState()
 
    - This ```useState()``` is a value notifier Provider
-   - This method creates, subscribe & listen to the changes
+   - This method creates, subscribes & listens to the changes
    - We can use this for simple data types
   
   ``` dart
@@ -146,7 +146,7 @@ final controller2 = useAnimationController();
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
        Center(
-        /// will get re-rendered whenever value changes
+        /// will get re-rendered whenever the value changes
       child: Text('${count.value}'),
     ),
         /// on click value get incremented
@@ -166,8 +166,8 @@ final controller2 = useAnimationController();
 
 ## 2. useEffect()
 
--  In this method we can do the initialisation and dispose
--  This method is called synchronously on every ```build```, unless ```[keys]``` is specified. In which case [useEffect] is called again only if any value inside [keys] as changed.
+-  In this method, we can do the initialization and dispose
+-  This method is called synchronously on every ```build```, unless ```[keys]``` is specified. In which case [useEffect] is called again only if any value inside [keys] has changed.
   
   ```dart
    useEffect(() {
@@ -176,12 +176,12 @@ final controller2 = useAnimationController();
     ///  Cancelling polling
     ///  Clearing timeouts
     ///  Cancelling active HTTP connections.
-    ///  Cancelling WebSockets conncetions.
+    ///  Cancelling WebSockets connections.
       final timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         counter.value = timer.tick;
       });
 
-      /// we can dispose the stream here, we are subscibed to
+      /// we can dispose the stream here, we are subscribed to
       return timer.cancel;
     }, []);
   ```
@@ -191,8 +191,8 @@ This is a simple implemntation of useEffect(), using ```Timer```
 ## 3. useMemoized()
 
 - This method basically caches the complex instances 
-- Calculates the function for first time and store it, whenever this method recalled, it return the previous saved value
-- This may change the value, when the dependencies change
+- Calculates the function for the first time and stores it, whenever this method is recalled, it returns the previously saved value
+- This may change the value when the dependencies change
 
 ``` dart
 class MemoizedHook extends HookWidget {
@@ -212,7 +212,7 @@ class MemoizedHook extends HookWidget {
     
     final futureData = useMemoized(getData, [count.value]);
 
-    /// Here useFuture() subscribe to the future and return its current state
+    /// Here useFuture() subscribe to the future and returns its current state
 
 
     final snapshot = useFuture(futureData);
@@ -229,7 +229,7 @@ class MemoizedHook extends HookWidget {
 
 ## 4. useRef()
 
-- An object that contain single mutable properties
+- An object that contains single mutable properties
 - Will not re-render the changes with every value change
 - useRef() will remember the data
   
@@ -240,7 +240,7 @@ Widget build(BuildContext context) {
     /// using the TextEditingController hook
     final textController = useTextEditingController();
 
-    /// useState() this render the every character entered by user on screen
+    /// useState() this renders every character entered by the user on a screen
 
     // final name = useState('');
 
@@ -266,22 +266,22 @@ Widget build(BuildContext context) {
   }
 ```
 
- ```useState()```  can store the value, and rerenders whenever any changes happens
+ ```useState()```  can store the value, and rerenders whenever any changes happen
 
-```useRef()```, only store the value, it don't make available to render to screen
+```useRef()```, only store the value, it doesn't make it available to render to the screen
 
 > In the above code, we've seen the ```useFocusNode``` and ```useTextEditingController``` hooks,
 > which pretty simple to use
-> we just have to use the single line code to initialise and dispose
+> we just have to use the single-line code to initialize and dispose
 
 
 ## 5. useCallback()
 
-- This hook mainly used, when we've to do the caching of object
-- This hook cache the entire function, if same method is called again
+- This hook is mainly used when we've to do the caching of an object
+- This hook cache the entire function, if the same method is called again
 - It maintains the state, rather than recreating it
-- It caches the whole function and process it 
-- It will change the value, when the dependecies mentioned in ```[keys]``` changes, and return the new output
+- It caches the whole function and processes it 
+- It will change the value, when the dependencies mentioned in ```[keys]``` changes, and return the new output
 
 ```dart
 final cachedFun = useCallback((){
@@ -313,7 +313,7 @@ class UseContextHook extends HookWidget {
     );
   }
 
-  /// This is outside the build method, this method don't have the access of context
+  /// This is outside the build method, this method doesn't have the access to context
   /// Here we can use the useContext() directly in place of context
   SizedBox sizedBox() => SizedBox(height: MediaQuery.of(useContext()).size.height * 0.2);
 }
@@ -323,7 +323,7 @@ class UseContextHook extends HookWidget {
 ## 7. useValueChanged()
 
 - This is a value notifier hook
-- If there is change in any other value Notifier, based on that, if we want to perform some other action then this hok
+- If there is a change in any other value Notifier, based on that, if we want to perform some other action then this hok
 
 ``` dart
 final count = useState(0);
@@ -346,7 +346,7 @@ if we run the above code with this code snippet, the output will look like this
 
 - This hook is almost similar to ```useState()```
 - This hook is used for the complex data type
-- Complex data means, if we have to update the Value according to the state
+- Complex data means if we have to update the Value according to the state
 
 ``` dart
 /// Here we are creating the state
@@ -364,7 +364,7 @@ class IncrementAction {
 class UseReducer extends HookWidget {
   final State initialState = State();
 
-  /// According to actions and state we do computation here
+  /// According to actions and state, we do computation here
   State reducer(State state, action) {
     if (action is IncrementAction) {
       return State(counter: state.counter + action.count);
@@ -374,8 +374,8 @@ class UseReducer extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// providing the inital state, inital action and reducer to [useReducer()]
-    final store = useReducer(reducer, initialState: initialState, initialAction: IncrementAction(count: 0));
+    /// providing the initial state, initial action and reducer to [useReducer()]
+    final store = useReducer(reducer, initialState: initialState, initial action: IncrementAction(count: 0));
     return Scaffold(
       appBar: AppBar(
         title: Text(''),
@@ -407,17 +407,16 @@ class UseReducer extends HookWidget {
 
 ```
 
-In above code we've implemented the counter app, using the ```useReducer``` hook 
+In the above code we've implemented the counter app, using the ```useReducer``` hook 
 here we have the ```State``` and ```Action```, based on that state and action, ```reducer()``` function returns the new state
 
 We can trigger the update using ```dispatch()``` 
 
-And to listen the new value we'll look for variable in ```State```
+And to listen to the new value we'll look for a variable in ```State```
 
-### Yeah ! this is quit long article, i've tried to cover most of the hooks which is very important
+### Yeah! this is a quite long article, I've tried to cover most of the hooks, which are very important
 
 So, that's all for this article. I hope this helped you to understand the Flutter Hooks. If I'm left with something crucial, please let me know in the comment section.
 
 
 Feel free to connect with me on [twitter](https://mobile.twitter.com/iamsureshsharma) and [github](https://github.com/iamsureshsharma)
-
